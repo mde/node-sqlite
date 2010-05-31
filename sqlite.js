@@ -17,8 +17,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 // TODO: async
 
 var bindings = require("./sqlite3_bindings");
-process.mixin(GLOBAL, bindings);
-process.mixin(exports, bindings);
+for (var p in bindings) {
+  global[p] = bindings[p];
+  this[p] = bindings[p];
+}
 
 
 // Conform somewhat to http://dev.w3.org/html5/webdatabase/#sql
